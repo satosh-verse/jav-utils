@@ -58,7 +58,7 @@ public class TimeAnalyzer<T,K> {
 
 
 
-  interface Matcher<T,K> {
+  public interface Matcher<T,K> {
     K getType(T t);
   }
 }
