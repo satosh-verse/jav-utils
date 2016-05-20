@@ -18,6 +18,7 @@ package me.samen.jutil;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -106,6 +107,9 @@ public class PerfMeasureHelper<T> {
     return getDump(TimeUnit.MILLISECONDS);
   }
 
+  public Set<T> getKeys() {
+    return map.keySet();
+  }
 
   private  class Entry {
     String name;
