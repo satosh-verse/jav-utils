@@ -66,6 +66,21 @@ public class PerfMeasureHelper<T> {
   }
 
   /**
+   * reset the timer for key t. After the call, its good as new.
+   * @param t key
+   * @return true if success, false otherwise
+   */
+  public boolean reset(T t) {
+    Entry entry = map.get(t);
+    if (entry == null) {
+      return false;
+    }
+    boolean ret = entry.reset();
+    map.put(t, entry);
+    return ret;
+  }
+
+  /**
    * sum of all (stopTime-startTime) for key t
    * @param t key
    * @return - time in millsec, -1 if error
@@ -117,9 +132,7 @@ public class PerfMeasureHelper<T> {
 
     public Entry(String name) {
       this.name = name;
-      strt = new LinkedList<>();
-      stp = new LinkedList<>();
-
+      reset();
     }
 
     Entry() {
@@ -152,6 +165,11 @@ public class PerfMeasureHelper<T> {
       return true;
     }
 
+    boolean reset() {
+      strt = new LinkedList<>();
+      stp = new LinkedList<>();
+      return true;
+    }
 
     long totalTime() {
       int r = strt.size();
@@ -173,6 +191,8 @@ public class PerfMeasureHelper<T> {
       }
       return sum;
     }
+
+
 
     private long time() {
       return System.nanoTime();

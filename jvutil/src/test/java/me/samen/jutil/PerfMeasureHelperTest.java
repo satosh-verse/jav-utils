@@ -1,5 +1,5 @@
 package me.samen.jutil;
-
+// TODO(satosh.dhanyamraju): copyright 
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,7 +8,7 @@ import me.samen.jutil.PerfMeasureHelper;
 import static org.junit.Assert.*;
 
 /**
- * Created by santosh on 5/19/16.
+ * @author  santosh on 5/19/16.
  */
 public class PerfMeasureHelperTest {
   PerfMeasureHelper<String> perfMeasureHelper;
@@ -67,6 +67,16 @@ public class PerfMeasureHelperTest {
   @Test
   public void testStopWithoutStarIsIgnored() throws Exception {
     assertFalse(perfMeasureHelper.stop(b));
+  }
+
+  @Test
+  public void testReset() throws Exception {
+    cycle(a, 100);
+    assertEquals(100, perfMeasureHelper.getTotalTime(a));
+    cycle(a, 100);
+    assertEquals(200, perfMeasureHelper.getTotalTime(a));
+    perfMeasureHelper.reset(a);
+    assertEquals(0, perfMeasureHelper.getTotalTime(a));
   }
 
   private void cycle(String tag, long waitTime) {
